@@ -5,6 +5,9 @@ import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
+  remove(arg0: number) {
+    throw new Error('Method not implemented.');
+  }
   private users: User[] = [];
   private idSequence = 0;
 
