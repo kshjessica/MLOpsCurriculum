@@ -6,11 +6,11 @@
 
 ## Parameter
 
-| Name      | Type   | Description | Required              |
-| --------- | ------ | ----------- | --------------------- |
-| payee_id  | number | 지급인 id   | <ul><li>[x]</li></ul> |
-| drawee_id | number | 수취인 id   | <ul><li>[x]</li></ul> |
-| amount    | number | 이체 금액   | <ul><li>[x]</li></ul> |
+| Name      | Type   | Description | Required |
+| --------- | ------ | ----------- | -------- |
+| payee_id  | number | 지급인 id   | [x]      |
+| drawee_id | number | 수취인 id   | [x]      |
+| amount    | number | 이체 금액   | [x]      |
 
 ## Response
 
