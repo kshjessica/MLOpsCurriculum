@@ -1,44 +1,33 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from './entities/user.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './entity/user.entity';
+import { UserParams } from './users.inference';
 
 @Injectable()
 export class UsersService {
-  private users: User[] = [];
-  private idSeq = 0;
+  constructor(
+    @InjectRepository(User)
+    private usersRepository: Repository<User>,
+  ) {}
 
-  create(createUserDto: CreateUserDto) {
-    this.users.push({
-      ...createUserDto,
-      id: this.idSeq++,
-    });
-    return this.users.at(-1);
+  async create(user: UserParams) {
+    return this.usersRepository.create(user);
   }
 
-  findAll(): User[] {
-    return this.users;
+  async findAll() {
+    return this.usersRepository.find();
   }
 
-  findOne(id: number): User {
-    return this.users.find((user) => user.id === id);
+  async findOne(id: string) {
+    return await this.usersRepository.findOne(id);
   }
 
-  update(id: number, updateUserDto: UpdateUserDto): User {
-    const i = this.users.findIndex((user) => user.id == id);
-    if (i === -1) return null;
-    this.users[i] = {
-      ...this.users[i],
-      ...updateUserDto,
-    };
-    return this.users[i];
+  async update(id: string, user: UserParams) {
+    return this.usersRepository.update(id, user);
   }
 
-  remove(id: number): User {
-    const i = this.users.findIndex((user) => user.id == id);
-    if (i === -1) return null;
-    const user = this.users[i];
-    this.users.splice(i, 1);
-    return user;
+  async delete(id: string) {
+    return this.usersRepository.delete(id);
   }
 }
