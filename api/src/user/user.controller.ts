@@ -3,21 +3,21 @@ import {
   Get,
   Post,
   Body,
-  Put,
   Param,
+  Put,
   Delete,
 } from '@nestjs/common';
+import { User } from './entity/user.entity';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from './entity/user.entity';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  async create(@Body() createUserDto: CreateUserDto): Promise<User> {
+  async create(@Body() createUserDto: CreateUserDto): Promise<CreateUserDto> {
     return this.userService.create(createUserDto);
   }
 
@@ -27,28 +27,17 @@ export class UserController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<User> {
+  async findOne(@Param('id') id: number): Promise<User> {
     return this.userService.findOne(id);
   }
 
   @Put(':id')
-  async update(
-    @Param('id') id: string,
-    @Body() updateUserDto: UpdateUserDto,
-  ): Promise<User> {
-    return updateUser();
-
-    function updateUser(): User | PromiseLike<User> {
-      return this.userService.update(id, updateUserDto);
-    }
+  async update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
+    return this.userService.update(id, updateUserDto);
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<User> {
-    return deleteUser();
-
-    function deleteUser(): User | PromiseLike<User> {
-      return this.userService.delete(id);
-    }
+  async delete(@Param('id') id: number) {
+    return this.userService.remove(id);
   }
 }
