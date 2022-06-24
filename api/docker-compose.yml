@@ -9,7 +9,7 @@ services:
       - .:/usr/src/app
       - ./usr/src/app/node_modules
     env_file:
-      - ormconfig.json
+      - .env
     # Run development stage
     command: npm run start:dev
     ports:
@@ -20,9 +20,9 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_DB: ${database}
-      POSTGRES_USER: ${username}
-      POSTGRES_PASSWORD: ${password}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - '5432:5432'
     volumes:
