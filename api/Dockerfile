@@ -8,12 +8,9 @@ FROM node:18-alpine As build-dev
 WORKDIR /usr/src/app
 
 # Set dependencies
-COPY --chown=node:node package*.json ./
+COPY package*.json ./
 RUN npm ci
-COPY --chown=node:node . .
-
-# Set user
-USER node
+COPY . .
 
 ###################
 # BUILD FOR PRODUCTION
@@ -23,11 +20,11 @@ FROM node:18-alpine As build-pro
 
 WORKDIR /usr/src/app
 
-COPY --chown=node:node package*.json ./
+COPY package*.json ./
 
 # Access Nest CLI
-COPY --chown=node:node --from=build-dev /usr/src/app/node_modules ./node_modules
-COPY --chown=node:node . .
+COPY --from=build-dev /usr/src/app/node_modules ./node_modules
+COPY . .
 
 # Create production bundle
 RUN npm run build
@@ -38,9 +35,6 @@ ENV NODE_ENV production
 # Remove existing node_modules dir
 RUN npm ci --only=production && npm cache clean --force
 
-RUN chown node /usr/src/app
-USER node
-
 ###################
 # PRODUCTION
 ###################
@@ -48,8 +42,8 @@ USER node
 FROM node:18-alpine As production
 
 # Copy code from build to production
-COPY --chown=node:node --from=build-pro /usr/src/app/node_modules ./node_modules
-COPY --chown=node:node --from=build-pro /usr/src/app/dist ./dist
+COPY --from=build-pro /usr/src/app/node_modules ./node_modules
+COPY --from=build-pro /usr/src/app/dist ./dist
 
 # Start server 
 CMD [ "node", "dist/main.js" ]
