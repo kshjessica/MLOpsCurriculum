@@ -11,7 +11,6 @@ WORKDIR /usr/src/app
 COPY --chown=node:node package*.json ./
 RUN npm ci
 COPY --chown=node:node . .
-RUN chown node /dist
 
 # Set user
 USER node
@@ -23,10 +22,12 @@ USER node
 FROM node:18-alpine As build-pro
 
 WORKDIR /usr/src/app
+
 COPY --chown=node:node package*.json ./
 
 # Access Nest CLI
 COPY --chown=node:node --from=build-dev /usr/src/app/node_modules ./node_modules
+COPY --chown=node:node --from=build-dev /usr/src/app/dist ./dist
 COPY --chown=node:node . .
 
 # Create production bundle
