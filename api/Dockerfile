@@ -6,12 +6,12 @@ FROM node:18-alpine As build-dev
 
 # Create app directory
 WORKDIR /usr/src/app
-WORKDIR /usr/src/app/dist
 
 # Set dependencies
 COPY --chown=node:node package*.json ./
 RUN npm ci
 COPY --chown=node:node . .
+RUN chown node /dist
 
 # Set user
 USER node
