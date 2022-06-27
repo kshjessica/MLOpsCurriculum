@@ -6,6 +6,7 @@ FROM node:18-alpine As build-dev
 
 # Create app directory
 WORKDIR /usr/src/app
+WORKDIR /usr/src/app/dist
 
 # Set dependencies
 COPY --chown=node:node package*.json ./
