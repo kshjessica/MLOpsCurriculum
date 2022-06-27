@@ -27,7 +27,6 @@ COPY --chown=node:node package*.json ./
 
 # Access Nest CLI
 COPY --chown=node:node --from=build-dev /usr/src/app/node_modules ./node_modules
-COPY --chown=node:node --from=build-dev /usr/src/app/dist ./dist
 COPY --chown=node:node . .
 
 # Create production bundle
@@ -39,6 +38,7 @@ ENV NODE_ENV production
 # Remove existing node_modules dir
 RUN npm ci --only=production && npm cache clean --force
 
+RUN chown node /usr/src/app
 USER node
 
 ###################
