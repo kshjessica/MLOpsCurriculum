@@ -59,7 +59,7 @@ describe('UserController', () => {
   });
 
   describe('GET /user/:id', () => {
-    it('should return a user with the requested id', async () => {
+    it('should return the user with the requested id', async () => {
       jest
         .spyOn(mockUserService, 'findOne')
         .mockImplementation(() => mockUser[0]);
@@ -78,12 +78,39 @@ describe('UserController', () => {
         .mockRejectedValue(
           new BadRequestException('Requested id must be an integer'),
         );
-      expect(controller.findOne(parseInt('user1'))).rejects.toThrow(
+      expect(controller.findOne(parseInt('idNumberOne'))).rejects.toThrow(
         BadRequestException,
       );
     });
   });
+
   // describe('POST /user', () => {});
+
   // describe('PUT /user/:id', () => {});
-  // describe('DELETE /user/:id', () => {});
+
+  describe('DELETE /user/:id', () => {
+    it('should remove the user with the requested id', async () => {
+      jest
+        .spyOn(mockUserService, 'remove')
+        .mockImplementation(() => mockUser[0]);
+      const response = await controller.delete(0);
+      expect(response).toEqual(mockUser[0]);
+    });
+    it('should return error if requested id is not found', async () => {
+      jest
+        .spyOn(mockUserService, 'remove')
+        .mockRejectedValue(new BadRequestException('User not found'));
+      expect(controller.delete(4)).rejects.toThrow(BadRequestException);
+    });
+    it('should return error if requested id is not integer', async () => {
+      jest
+        .spyOn(mockUserService, 'remove')
+        .mockRejectedValue(
+          new BadRequestException('Requested id must be an integer'),
+        );
+      expect(controller.delete(parseInt('idNumberOne'))).rejects.toThrow(
+        BadRequestException,
+      );
+    });
+  });
 });
