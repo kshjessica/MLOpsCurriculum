@@ -2,21 +2,21 @@ from locust import HttpUser, TaskSet, task, between
 
 
 class UserBehavior(TaskSet):
-    @task
-    def get_all_users(self):
-        with self.client.get("/user", catch_response=True) as response:
-            if response.status_code == 200:
-                response.success("Succeeded to get all users")
-            else:
-                response.failure("Failed to get all users")
+    # @task
+    # def get_all_users(self):
+    #     with self.client.get("/user", catch_response=True) as response:
+    #         if response.status_code == 200:
+    #             response.success()
+    #         else:
+    #             response.failure("Failed to get all users")
 
     @task
     def create_user(self):
         with self.client.post(
-            "/user", {"name": "testuser", "age": 20}, catch_response=True
+            "/user", json={"name": "testuser", "age": 20}, catch_response=True
         ) as response:
             if response.status_code == 201:
-                response.success("Succeeded to create user")
+                response.success()
             else:
                 response.failure("Failed to create user")
 
