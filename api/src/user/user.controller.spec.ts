@@ -118,7 +118,32 @@ describe('UserController', () => {
     });
   });
 
-  // describe('PUT /user/:id', () => {});
+  describe('PUT /user/:id', () => {
+    const updateUser1 = { ...mockUser[0], age: 18 };
+
+    it('should update the user with the requested id', async () => {
+      jest.spyOn(mockUserService, 'update').mockResolvedValue(updateUser1);
+      expect(await controller.update(0, mockUser[0])).toEqual(updateUser1);
+    });
+    it('should return error if requested id is not found', async () => {
+      jest
+        .spyOn(mockUserService, 'update')
+        .mockRejectedValue(new BadRequestException('User not found'));
+      expect(controller.update(5, mockUser[5])).rejects.toThrow(
+        BadRequestException,
+      );
+    });
+    it('should return error if requested id is not integer', async () => {
+      jest
+        .spyOn(mockUserService, 'update')
+        .mockRejectedValue(
+          new BadRequestException('Requested id must be an integer'),
+        );
+      expect(
+        controller.update(parseInt('idNumberOne'), mockUser[0]),
+      ).rejects.toThrow(BadRequestException);
+    });
+  });
 
   describe('DELETE /user/:id', () => {
     it('should remove the user with the requested id', async () => {
