@@ -1,6 +1,6 @@
 name: Unit Test
 
-on: [push, pull_request]
+on: pull_request
 
 jobs:
   build:
@@ -10,5 +10,3 @@ jobs:
       - uses: actions/checkout@v1
       - name: Run Jest
         uses: stefanoeb/jest-action@1.0.4
-        with:
-          jestArgs: api/src/users/user.controller.test.js
