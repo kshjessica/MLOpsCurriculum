@@ -1,12 +1,19 @@
-name: Unit Test
+name: Unit Test CI
 
 on: pull_request
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+
       - name: Run Jest
-        uses: stefanoeb/jest-action@1.0.4
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+        run: |
+          cd api
+          npm install
+          npm test src/user/user.controller.spec.ts
