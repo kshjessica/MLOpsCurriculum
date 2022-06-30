@@ -70,7 +70,7 @@ describe('UserController', () => {
       jest
         .spyOn(mockUserService, 'findOne')
         .mockRejectedValue(new BadRequestException('User not found'));
-      expect(controller.findOne(4)).rejects.toThrow(BadRequestException);
+      expect(controller.findOne(5)).rejects.toThrow(BadRequestException);
     });
     it('should return error if requested id is not integer', async () => {
       jest
@@ -84,7 +84,39 @@ describe('UserController', () => {
     });
   });
 
-  // describe('POST /user', () => {});
+  describe('POST /user', () => {
+    const user4 = { name: 'user4', age: 26 };
+    const createUser4 = { ...user4, id: 4 };
+
+    it('should create a new user', async () => {
+      jest.spyOn(mockUserService, 'create').mockResolvedValue(createUser4);
+      expect(await controller.create(user4)).toEqual(createUser4);
+    });
+    it('should return error if name field is empty', async () => {
+      jest
+        .spyOn(mockUserService, 'create')
+        .mockRejectedValue(new BadRequestException('Name is required'));
+      expect(controller.create({ ...user4, name: null })).rejects.toThrow(
+        BadRequestException,
+      );
+    });
+    it('should return error if age field is empty', async () => {
+      jest
+        .spyOn(mockUserService, 'create')
+        .mockRejectedValue(new BadRequestException('Age is required'));
+      expect(controller.create({ ...user4, age: null })).rejects.toThrow(
+        BadRequestException,
+      );
+    });
+    it('should return error if requested age is not integer', async () => {
+      jest
+        .spyOn(mockUserService, 'create')
+        .mockRejectedValue(new BadRequestException('Age must be an integer'));
+      expect(controller.findOne(parseInt('userNumberFour'))).rejects.toThrow(
+        BadRequestException,
+      );
+    });
+  });
 
   // describe('PUT /user/:id', () => {});
 
@@ -100,7 +132,7 @@ describe('UserController', () => {
       jest
         .spyOn(mockUserService, 'remove')
         .mockRejectedValue(new BadRequestException('User not found'));
-      expect(controller.delete(4)).rejects.toThrow(BadRequestException);
+      expect(controller.delete(5)).rejects.toThrow(BadRequestException);
     });
     it('should return error if requested id is not integer', async () => {
       jest
