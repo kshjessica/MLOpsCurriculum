@@ -1,0 +1,14 @@
+name: Unit Test
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Run Jest
+        uses: stefanoeb/jest-action@1.0.4
+        with:
+          jestArgs: api/src/users/user.controller.test.js
