@@ -71,3 +71,43 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+---
+
+## Unit Test Result
+
+```
+$ npm test user.controller.spec.ts
+
+> api@0.0.1 test
+> jest "user.controller.spec.ts"
+
+ PASS  src/user/user.controller.spec.ts
+  UserController
+    ✓ should be defined (1 ms)
+    GET /user
+      ✓ should return all users
+    GET /user/:id
+      ✓ should return the user with the requested id
+      ✓ should return error if requested id is not found (5 ms)
+      ✓ should return error if requested id is not integer (1 ms)
+    POST /user
+      ✓ should create a new user
+      ✓ should return error if name field is empty
+      ✓ should return error if age field is empty (1 ms)
+      ✓ should return error if requested age is not integer
+    PUT /user/:id
+      ✓ should update the user with the requested id
+      ✓ should return error if requested id is not found (1 ms)
+      ✓ should return error if requested id is not integer
+    DELETE /user/:id
+      ✓ should remove the user with the requested id
+      ✓ should return error if requested id is not found
+      ✓ should return error if requested id is not integer
+
+Test Suites: 1 passed, 1 total
+Tests:       15 passed, 15 total
+Snapshots:   0 total
+Time:        1.841 s, estimated 2 s
+Ran all test suites matching /user.controller.spec.ts/i.
+```

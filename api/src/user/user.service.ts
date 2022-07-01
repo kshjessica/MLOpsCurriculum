@@ -12,16 +12,16 @@ export class UserService {
     private userRepository: Repository<User>,
   ) {}
 
-  async create(user: CreateUserDto): Promise<CreateUserDto> {
-    return this.userRepository.save(user);
-  }
-
   async findAll() {
     return this.userRepository.find();
   }
 
   async findOne(id: number) {
     return this.userRepository.findOne(id);
+  }
+
+  async create(user: CreateUserDto): Promise<CreateUserDto> {
+    return this.userRepository.save(user);
   }
 
   async update(id: number, user: UpdateUserDto) {
