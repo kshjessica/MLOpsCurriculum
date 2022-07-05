@@ -1,10 +1,9 @@
-name: Deploy to Amazon ECS
+name: ECS CD
 
 on:
   push:
     branches:
-      # - main
-      - feature/ci-cd
+      - main
 
 jobs:
   deploy:
