@@ -4,7 +4,10 @@ config:
     secure: AAABAEeFEn8M1ABvvL6Me2LLWN6cJ/pTVsG88C3mnI5pZhnRhE7L36j9cpwY1gsLQ/c9mXkZUAl6EbV66DsAEhKRw4BhziQ/LX7HiHKfVS73pQGB35RApPjK9EH30A==
   mlops-curriculum-iac:dbName:
     secure: AAABAMFEZSfNN3hh0r4+4UjILto7fXNZVi6T1yAXv/S4u/EpHQJK7w==
+  mlops-curriculum-iac:dbPort: '5432'
   mlops-curriculum-iac:dbPwd:
     secure: AAABALGtmVfRkqlNGeudabJF46f6zYI/8gjm9zQxrsUAQnApP8F6BA==
   mlops-curriculum-iac:dbUsr:
     secure: AAABAKujdvApyZ/+y5HF/MGta7YRNB0WJnrnKgwOUN6SgHJCPTBrXg==
+  mlops-curriculum-iac:image:
+    secure: AAABAK5POA9Zlmi72OPKAm6eN90m9f9bIGbIo8spZt9Xr9MaYx4+iJIftnACKT91JpnJEwvpYg/KLvkKjCEyLqwfqLJ0yrCqDmddwLsGuEnhI9ZX3FxzRpFVcrvW+PVIB7av/L8xD/4Z+Fwh/Ec1
