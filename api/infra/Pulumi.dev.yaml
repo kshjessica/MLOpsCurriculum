@@ -1,2 +1,10 @@
 config:
   aws:region: ap-northeast-2
+  mlops-curriculum-iac:dbHost:
+    secure: AAABAEeFEn8M1ABvvL6Me2LLWN6cJ/pTVsG88C3mnI5pZhnRhE7L36j9cpwY1gsLQ/c9mXkZUAl6EbV66DsAEhKRw4BhziQ/LX7HiHKfVS73pQGB35RApPjK9EH30A==
+  mlops-curriculum-iac:dbName:
+    secure: AAABAMFEZSfNN3hh0r4+4UjILto7fXNZVi6T1yAXv/S4u/EpHQJK7w==
+  mlops-curriculum-iac:dbPwd:
+    secure: AAABALGtmVfRkqlNGeudabJF46f6zYI/8gjm9zQxrsUAQnApP8F6BA==
+  mlops-curriculum-iac:dbUsr:
+    secure: AAABAKujdvApyZ/+y5HF/MGta7YRNB0WJnrnKgwOUN6SgHJCPTBrXg==
