@@ -1,5 +1,6 @@
 import * as awsx from '@pulumi/awsx';
 import * as pulumi from '@pulumi/pulumi';
+import { db } from './db';
 
 const cluster = new awsx.ecs.Cluster('mlops-curriculum-iac');
 
@@ -42,4 +43,4 @@ const service = new awsx.ecs.FargateService('mlops-seohyun-srvc', {
   },
 });
 
-export const serviceURL = service;
+export const serviceURL = { service, db };
