@@ -22,6 +22,9 @@ export class UserValidationPipe implements PipeTransform<any> {
     if (errors.length > 0 && errors[0].constraints['isInt']) {
       this.logger.error('"age" must be an integer');
       throw new BadRequestException('"age" must be an integer');
+    } else if (errors.length > 0 && errors[0].constraints['isNotEmpty']) {
+      this.logger.warn('"name" parameter is empty');
+      throw new BadRequestException('"name" parameter is empty');
     }
     return value;
   }
