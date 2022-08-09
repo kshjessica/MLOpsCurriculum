@@ -7,11 +7,11 @@ const config = new pulumi.Config();
 
 const dbEndpoint = bkndListener.endpoint;
 
-const service = new awsx.ecs.FargateService('service-iac', {
+const service = new awsx.ecs.FargateService('bkndIac', {
   cluster: cluster,
   taskDefinitionArgs: {
     containers: {
-      service: {
+      bkndIac: {
         image:
           '854407906105.dkr.ecr.ap-northeast-2.amazonaws.com/mlopscurriculum:mlops-seohyun',
         cpu: 256,
@@ -32,7 +32,7 @@ const service = new awsx.ecs.FargateService('service-iac', {
           },
           {
             name: 'DB_PORT',
-            value: e.port.toString(),
+            value: config.requireSecret('dbPort'),
           },
           {
             name: 'DB_USERNAME',

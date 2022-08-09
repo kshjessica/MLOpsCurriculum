@@ -4,7 +4,7 @@ import { cluster } from './cluster';
 
 const config = new pulumi.Config();
 
-const database = new awsx.ecs.FargateService('db-iac', {
+const database = new awsx.ecs.FargateService('dbIac', {
   cluster: cluster,
   taskDefinitionArgs: {
     containers: {
@@ -31,8 +31,11 @@ const database = new awsx.ecs.FargateService('db-iac', {
   },
 });
 
-const bkndListener = new awsx.elasticloadbalancingv2.NetworkListener('lb-iac', {
-  port: 5432,
-});
+const bkndListener = new awsx.elasticloadbalancingv2.NetworkListener(
+  'bkndIac',
+  {
+    port: 3000,
+  },
+);
 
 export { cluster, database, bkndListener };

@@ -1,6 +1,8 @@
 config:
   assignment8:dbName:
     secure: AAABADm8T2uNKWmcIT5Qgs8j5xfwB86rQFgMJ5enQ9KCkdKj3E9ZEg==
+  assignment8:dbPort:
+    secure: AAABAKJ0ZNYy8th8tqfh2LbGU26X5TudInrIMKKSSCg+jWjd
   assignment8:dbPwd:
     secure: AAABAIv+zCDP5XvjbBLe3BniI1HlM+kDccUKlveOgy4fMZaxbvFc9A==
   assignment8:dbUser:
