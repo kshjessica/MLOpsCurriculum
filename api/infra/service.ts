@@ -1,11 +1,14 @@
 import * as awsx from '@pulumi/awsx';
 import * as pulumi from '@pulumi/pulumi';
 import { cluster } from './cluster';
-import { bkndListener } from './database';
+import { dbEndpoint } from './database';
 
 const config = new pulumi.Config();
 
-const dbEndpoint = bkndListener.endpoint;
+const bkndListener = new awsx.elasticloadbalancingv2.NetworkListener(
+  'bkndIac',
+  { port: 3000 },
+);
 
 const service = new awsx.ecs.FargateService('bkndIac', {
   cluster: cluster,
@@ -32,7 +35,7 @@ const service = new awsx.ecs.FargateService('bkndIac', {
           },
           {
             name: 'DB_PORT',
-            value: config.requireSecret('dbPort'),
+            value: e.port.toString(),
           },
           {
             name: 'DB_USERNAME',

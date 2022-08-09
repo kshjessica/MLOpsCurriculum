@@ -4,6 +4,11 @@ import { cluster } from './cluster';
 
 const config = new pulumi.Config();
 
+const dbListener = new awsx.elasticloadbalancingv2.NetworkListener('dbIac', {
+  port: 5432,
+});
+const dbEndpoint = dbListener.endpoint;
+
 const database = new awsx.ecs.FargateService('dbIac', {
   cluster: cluster,
   taskDefinitionArgs: {
@@ -11,7 +16,7 @@ const database = new awsx.ecs.FargateService('dbIac', {
       db: {
         image: 'postgres',
         memory: 512,
-        portMappings: [{ containerPort: 5432 }],
+        portMappings: [dbListener],
         environment: [
           {
             name: 'POSTGRES_NAME',
@@ -31,11 +36,4 @@ const database = new awsx.ecs.FargateService('dbIac', {
   },
 });
 
-const bkndListener = new awsx.elasticloadbalancingv2.NetworkListener(
-  'bkndIac',
-  {
-    port: 3000,
-  },
-);
-
-export { cluster, database, bkndListener };
+export { database, dbEndpoint };
