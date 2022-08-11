@@ -8,7 +8,7 @@
 ## Phase1.
 
 - EC2 endpoint: http://13.124.253.28:8000
-- ECS endpoint: http://54.180.32.132:3000
+- ECS endpoint: http://15.165.77.166:3000
 
 ### Summary
 
