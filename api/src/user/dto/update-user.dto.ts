@@ -1,9 +1,10 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsInt, IsNotEmpty, IsString } from 'class-validator';
 
 export class UpdateUserDto {
+  @IsNotEmpty()
   @IsString()
   name: string;
 
-  @IsNumber()
+  @IsInt()
   age: number;
 }
