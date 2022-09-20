@@ -1,0 +1,14 @@
+config:
+  assignment8:dbName:
+    secure: AAABADm8T2uNKWmcIT5Qgs8j5xfwB86rQFgMJ5enQ9KCkdKj3E9ZEg==
+  assignment8:dbPwd:
+    secure: AAABAIv+zCDP5XvjbBLe3BniI1HlM+kDccUKlveOgy4fMZaxbvFc9A==
+  assignment8:dbUser:
+    secure: AAABAFQzvE4huyH7be5QGTDcFryWIsjWIr8YXW5ZUNNXzxBsNZkELE2+
+  assignment8:pgName:
+    secure: AAABANX+NEbM6ckfn5OWtUcsKRdjghGeLGqjOXCyXwkj+d4sxocT3g==
+  assignment8:pgPwd:
+    secure: AAABAHYCG3APBioIvP4imOrKlsDQvMvZxR5JFpL3eouQ1olm/nHYNQ==
+  assignment8:pgUser:
+    secure: AAABABPDFnQbrfFYjHqtIw0oqNjJLa+Hdivfd1/KTi2JSURHU7ELVphZ
+  aws:region: ap-northeast-2
